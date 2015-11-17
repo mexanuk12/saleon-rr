@@ -8,6 +8,7 @@ export default class FilterModalGeo extends React.Component{
       Actions.fetchGeo(data.name);
     } else {
       Actions.setParam("geo", data.seo_name);
+      console.log(this);
       if (this.props.closeModal) {
         this.props.closeModal();
       }
@@ -18,7 +19,7 @@ export default class FilterModalGeo extends React.Component{
     var data = this.props.data;
     return (
       <div className="content" id="regions-list">
-        <FilterItemsList onItemClick={this.itemClick} items={data.list} />
+        <FilterItemsList onItemClick={this.itemClick.bind(this)} items={data.list} />
       </div>
     );
   }

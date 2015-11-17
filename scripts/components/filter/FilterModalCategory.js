@@ -1,5 +1,5 @@
 import React           from 'react';
-import FilterItemsList from './filterItemsList';
+import FilterItemsList from './FilterItemsList';
 import SliderStore     from './../slider/SliderStore';
 import TopNavStore     from './../topnav/TopNavStore';
 import Actions         from '../Actions';
@@ -14,11 +14,9 @@ export default class FilterModalCategory extends React.Component{
 
   itemClick(item) {
     Actions.setParam("category", item.seo_name);
-
     if (this.props.closeModal) {
       this.props.closeModal();
     }
-    //TopNavStore.setActiveTab("categories");
   }
 
   setPage(i) {
@@ -29,7 +27,7 @@ export default class FilterModalCategory extends React.Component{
 
   render() {
     var data = this.props.data;
-    var content = <FilterItemsList onItemClick={this.itemClick} items={data[this.state.current].sub} />;
+    var content = <FilterItemsList onItemClick={this.itemClick.bind(this)} items={data[this.state.current].sub} />;
     return (
       <div className="content" id="category-group-list">
         <div className="row">

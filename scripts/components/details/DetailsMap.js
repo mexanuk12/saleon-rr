@@ -36,8 +36,8 @@ export default class DetailsMap extends React.Component{
           var markers = self.state.markers;
           markers.push({
             title: addressString,
-            lng: results[0].geometry.bounds.La.j,
-            lat: results[0].geometry.bounds.Pa.j
+            lng: results[0].geometry.location.lng(),
+            lat: results[0].geometry.location.lat()
           });
 
           self.setState({
@@ -63,9 +63,9 @@ export default class DetailsMap extends React.Component{
       zoom: 15
     };
 
-    var places = this.state.markers.map(function (item) {
+    var places = this.state.markers.map(function (item, index) {
       return (
-        <Place lat={item.lat} lng={item.lng} text={item.title}/>
+        <Place key={index} lat={item.lat} lng={item.lng} text={item.title}/>
       )
     });
 
@@ -77,7 +77,7 @@ export default class DetailsMap extends React.Component{
     }
 
     for (var i in this.state.markers) {
-      placesItems.push(<li onClick={this.handleItemClick.bind(this, i)}>{this.state.markers[i].title}</li>)
+      placesItems.push(<li key={i} onClick={this.handleItemClick.bind(this, i)}>{this.state.markers[i].title}</li>)
     }
     return (
       <div className="places-map">

@@ -1,7 +1,6 @@
-import React       from 'react';
-import Reflux      from 'reflux';
+import React   from 'react';
 import Actions from './../Actions';
-
+import {Link}  from 'react-router';
 
 export default class XsTopNavItem extends React.Component {
   setItem() {
@@ -12,18 +11,31 @@ export default class XsTopNavItem extends React.Component {
   }
 
   render() {
-    let classNames = "fa" + " " + this.props.item.itemClass;
-    let alias = "#" + this.props.itemAlias;
-    if (this.props.item.alias == "Partner") {
-      alias = "/partner/index";
+    let classNames = 'fa' + ' ' + this.props.item.itemClass;
+    let link = this.props.itemAlias;
+    if (this.props.item.alias === 'Partner') {
+      return (<li>
+        <a href='/partner/index'>
+          <i className={classNames}></i>&nbsp;&nbsp;{this.props.item.title}
+        </a></li>
+      );
+    }
+
+    switch (link) {
+      case "geo":
+      case 'categories':
+      case 'brands':
+        link = "filter/" + link;
+        break;
     }
 
     return (
       <li>
-        <a href={alias} onClick={this.setItem.bind(this)}>
+        <Link to={"/" + link} onClick={this.setItem.bind(this)}>
           <i className={classNames}></i>
-        &nbsp;&nbsp;{this.props.item.title}</a>
+          &nbsp;&nbsp;{this.props.item.title}
+        </Link>
       </li>
-    )
+    );
   }
-};
+}

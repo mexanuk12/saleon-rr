@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, Link } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 
 //Pages components
 import App         from './pages/App';
@@ -24,6 +24,8 @@ export default class Root extends React.Component {
           <Route path='filter' component={null} >
             <Route path=':filterId' component={FilterPage} />
           </Route>
+          <Route path='subscription' component={null} />
+          <Route path='login' component={null} />
         </Route>
       </Router>
     );

@@ -1,18 +1,17 @@
 import React              from 'react';
-import Reflux             from 'reflux';
 import Actions            from '../Actions';
 import Modal              from './../modal/Modal';
 import DetailsMain        from './DetailsMain';
 import DetailsDescription from './DetailsDescription';
 import DetailsLocation    from './DetailsLocation';
 import DetailsStore       from './DetailsStore';
-import AppHistory          from './../../AppHistory';
+import AppHistory         from './../../AppHistory';
 
 export default class Details extends React.Component{
 
-  DETAILS_MAIN = "main";
-  DETAILS_DESCR = "description";
-  DETAILS_LOCATION = "location";
+  DETAILS_MAIN = 'main';
+  DETAILS_DESCR = 'description';
+  DETAILS_LOCATION = 'location';
 
   constructor() {
     super();
@@ -20,7 +19,7 @@ export default class Details extends React.Component{
       detailsStore: {
         ad: null
       }
-    }
+    };
   }
 
   componentDidMount() {
@@ -33,7 +32,7 @@ export default class Details extends React.Component{
   }
 
   onStateChange(state) {
-    this.setState({ "detailsStore": state });
+    this.setState({ detailsStore: state });
   }
 
   componentDidUpdate() {
@@ -41,12 +40,13 @@ export default class Details extends React.Component{
   }
 
   openDetailsDialog() {
-    if (this.props.id) {
-      var detailsStore = this.state.detailsStore;
+    let id = this.props.id;
+    if (id) {
+      let detailsStore = this.state.detailsStore;
       if (detailsStore.ad !== null) {
-        this.refs.modal.open()
+        this.refs.modal.open();
       } else {
-        Actions.fetchDetails(this.props.id);
+        Actions.fetchDetails(id);
       }
     }
   }
@@ -56,12 +56,12 @@ export default class Details extends React.Component{
   }
 
   render() {
-    var self = this;
-    var data = this.state.detailsStore.ad;
-    var content = null;
+    let self = this;
+    let data = this.state.detailsStore.ad;
+    let content = null;
 
     if (data === null) {
-      return (<div></div>)
+      return (<div></div>);
     }
 
     switch (this.state.detailsStore.current) {
@@ -74,7 +74,7 @@ export default class Details extends React.Component{
         break;
 
       case this.DETAILS_LOCATION:
-        content = (<DetailsLocation location={data.address} addresses={data.addresses.list}/>);
+        content = (<DetailsLocation location={data.address} addresses={data.addresses.list} />);
         break;
     }
 
@@ -82,9 +82,21 @@ export default class Details extends React.Component{
       <Modal ref="modal" isOpen={data !== null} title={data.name} onModalClose={this.handleClose}>
         <div className="details-modal">
           <div className="details-nav btn-group btn-group-justified">
-            <a onClick={function() { Actions.gotoPage(self.DETAILS_MAIN) }} className={ "btn btn-default" + (this.state.detailsStore.current === this.DETAILS_MAIN ? " active" : "") }>Акція</a>
-            {data.full_description ? <a onClick={function() { Actions.gotoPage(self.DETAILS_DESCR) }} className={ "btn btn-default" + (this.state.detailsStore.current === this.DETAILS_DESCR ? " active" : "") }>Деталі</a> : null }
-            <a onClick={function() { Actions.gotoPage(self.DETAILS_LOCATION) }} className={ "btn btn-default" + (this.state.detailsStore.current === this.DETAILS_LOCATION ? " active" : "") }>Мапа</a>
+            <a onClick={function () { Actions.gotoPage(self.DETAILS_MAIN); }}
+              className={ 'btn btn-default' + (this.state.detailsStore.current === this.DETAILS_MAIN ? ' active' : '') }>
+                Акція
+            </a>
+            { data.full_description ?
+              <a onClick={function () { Actions.gotoPage(self.DETAILS_DESCR); }}
+                className={ 'btn btn-default' + (this.state.detailsStore.current === this.DETAILS_DESCR ? ' active' : '') }>
+                  Деталі
+              </a>
+              : null
+            }
+            <a onClick={function () { Actions.gotoPage(self.DETAILS_LOCATION); }}
+              className={ 'btn btn-default' + (this.state.detailsStore.current === this.DETAILS_LOCATION ? ' active' : '') }>
+                Мапа
+            </a>
           </div>
           <div className="details-content">
             {content}
@@ -92,6 +104,5 @@ export default class Details extends React.Component{
         </div>
       </Modal>
     );
-
   }
 }

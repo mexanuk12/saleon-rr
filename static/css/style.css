@@ -8822,3 +8822,25 @@ div#app {
   .navbar-default.navbar-fixed-top.visible-xs-block.closed .icon-bar {
     background-color: white !important;
     border-color: white; }
+
+    .counter-row {
+      position: fixed;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      bottom: 20px;
+    }
+
+    .counter-row button,
+    .counter-row button:focus {
+      border: 1px solid #333;
+      background-color: #333;
+      color: white;
+      margin: 0 10px;
+    }
+
+    .counter-row button:hover {
+      background-color: white;
+      color: #333;
+      margin: 0 10px;
+    }

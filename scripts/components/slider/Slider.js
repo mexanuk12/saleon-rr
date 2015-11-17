@@ -15,6 +15,7 @@ export const PAGE_NONE = "page-none";
 export default class Slider extends React.Component {
   constructor() {
     super();
+    this.currentPageNo = 1;
     this.state = {
       sliderStore: null
     }
@@ -92,6 +93,7 @@ export default class Slider extends React.Component {
 
     switch (item.state) {
       case PAGE_CURRENT:
+        this.currentPageNo = index+1;
         isCurrent = true;
         break;
 
@@ -141,12 +143,17 @@ export default class Slider extends React.Component {
       return this._renderFallOut();
     }
 
-    let pagesContent = data.map(this._renderSliderPage);
+    let pagesContent = data.map(this._renderSliderPage.bind(this));
 
     return (
       <div className="slider container-fluid">
         <div className="row">
         { pagesContent }
+        </div>
+        <div className="counter-row">
+          <button className="btn btn-large" onClick={Actions.sliderPrev}><i className="fa fa-caret-left"></i></button>
+          {this.currentPageNo + '/' + pagesContent.length}
+          <button className="btn btn-large" onClick={Actions.sliderNext}><i className="fa fa-caret-right"></i></button>
         </div>
       </div>
     )

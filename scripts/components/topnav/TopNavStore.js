@@ -1,4 +1,4 @@
-import Reflux     from 'reflux';
+import Reflux  from 'reflux';
 import Actions from './../Actions';
 
 const TopNavStore = Reflux.createStore({
@@ -9,39 +9,39 @@ const TopNavStore = Reflux.createStore({
     this.data = {
       items: {
         geo: {
-          alias: "GeoFilter",
-          itemClass: "fa-globe",
-          title: "Регіони",
+          alias: 'GeoFilter',
+          itemClass: 'fa-globe',
+          title: 'Регіони',
           isActive: false
         },
         categories: {
-          alias: "CategoriesFilter",
-          itemClass: "fa-list",
-          title: "Категорії",
+          alias: 'CategoriesFilter',
+          itemClass: 'fa-list',
+          title: 'Категорії',
           isActive: false
         },
         brands: {
-          alias: "BrandsFilter",
-          itemClass: "fa-tags",
-          title: "Бренди",
+          alias: 'BrandsFilter',
+          itemClass: 'fa-tags',
+          title: 'Бренди',
           isActive: false
         },
         subscription: {
-          alias: "Subscription",
-          itemClass: "fa-pencil",
-          title: "Підписка",
+          alias: 'Subscription',
+          itemClass: 'fa-pencil',
+          title: 'Підписка',
           isActive: false
         },
         user: {
-          alias: "User",
-          itemClass: "fa-user",
-          title: "Користувач",
+          alias: 'User',
+          itemClass: 'fa-user',
+          title: 'Користувач',
           isActive: false
         },
         partner: {
-          alias: "Partner",
-          itemClass: "fa-briefcase",
-          title: "Партнерам",
+          alias: 'Partner',
+          itemClass: 'fa-briefcase',
+          title: 'Партнерам',
           isActive: false
         }
       },
@@ -51,7 +51,7 @@ const TopNavStore = Reflux.createStore({
   },
 
   setActiveTab: function (tabIndex) {
-    if (typeof this.data.items[tabIndex] !== "undefined") {
+    if (typeof this.data.items[tabIndex] !== 'undefined') {
       this.data.items[tabIndex].isActive = true;
     }
     this.trigger(this.data);
@@ -63,8 +63,8 @@ const TopNavStore = Reflux.createStore({
   },
 
   onSetNavTab: function (tabIndex) {
-    var current = null;
-    if (typeof this.data.items[tabIndex] !== "undefined") {
+    let current = null;
+    if (typeof this.data.items[tabIndex] !== 'undefined') {
       current = tabIndex;
     }
     this.data.current = current;

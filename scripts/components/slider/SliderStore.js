@@ -26,6 +26,7 @@ const SliderStore = Reflux.createStore({
 
   init() {
     this.listenTo(Actions.getSliderData,this.onGetSliderData);
+    this.listenTo(Actions.setParam, this.onSetParam);
   },
 
   onGetSliderData() {
@@ -183,7 +184,7 @@ const SliderStore = Reflux.createStore({
     }
   },
 
-  setParam(paramName, paramValue) {
+  onSetParam(paramName, paramValue) {
     if (paramName == 'geo') {
       this.params = {};
     } else if (paramName == 'category') {
